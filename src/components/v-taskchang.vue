@@ -8,15 +8,15 @@
                         <input v-model="changeTask.arrTask[i-1].task"
                                placeholder="Добавить задачу">
                         <input type="checkbox" v-model="changeTask.arrTask[i-1].checked">
-                        <button @click.prevent="removeTask(i-1)"><img src="../assets/vector_plus.svg" alt=""></button>
+                        <ui-btn @click.prevent="removeTask(i-1)"><img src="../assets/vector_plus.svg" alt=""></ui-btn>
                   </div>
-                  <button @click.prevent="updateTask()">сохранить изменения</button>
-                  <button @click.prevent="confirmationsDefault()">отменить изменения</button>
-                  <button @click.prevent="confirmationsRemove()">удалить</button>
+                  <ui-btn @click.prevent="updateTask()">сохранить изменения</ui-btn>
+                  <ui-btn @click.prevent="confirmationsDefault()">отменить изменения</ui-btn>
+                  <ui-btn @click.prevent="confirmationsRemove()">удалить</ui-btn>
                   <input
                         v-model="mission.task"
                         placeholder="Добавить задачу">
-                  <button @click.prevent="pushingInTask()">add</button>
+                  <ui-btn @click.prevent="pushingInTask()">add</ui-btn>
             </div>
             <v-confirmation
                   :show="confirmationRemoveShow"
@@ -34,6 +34,7 @@
 <script>
 import {mapGetters, mapActions} from "vuex";
 import VConfirmation from "@/components/v-confirmation";
+import UiBtn from "@/components/UI/ui-btn";
 
 const missionPattern = {
       task: '',
@@ -42,7 +43,7 @@ const missionPattern = {
 
 export default {
       name: "v-taskchang",
-      components: {VConfirmation},
+      components: {UiBtn, VConfirmation},
       data() {
             return {
                   confirmationRemoveShow:false,

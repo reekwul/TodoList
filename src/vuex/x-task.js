@@ -17,7 +17,6 @@ export const taskModule = {
         },
         add(state, task) {
             if(!task.index){
-                console.log(task)
                 state.tasks.push(JSON.parse(JSON.stringify(task)))
                 return
         }
