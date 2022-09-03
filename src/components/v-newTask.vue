@@ -150,8 +150,6 @@ export default {
       border: none;
       background: rgba(0, 9, 60, 0.2);
       border-radius: 6px;
-}
-input[type=text]{
       outline: none;
 }
 </style>
