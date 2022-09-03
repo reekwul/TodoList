@@ -1,14 +1,16 @@
 <template>
 <div v-show="show">
       <h3>Необходимо подтверждение {{forWhat}}</h3>
-      <button @click.prevent="confirmationTrue" value="true">да</button>
-      <button @click.prevent="confirmationFalse" value="false">нет</button>
+      <ui-btn @click.prevent="confirmationTrue" value="true">да</ui-btn>
+      <ui-btn @click.prevent="confirmationFalse" value="false">нет</ui-btn>
 </div>
 </template>
 
 <script>
+import UiBtn from "@/components/UI/ui-btn";
 export default {
       name: "v-confirmation",
+      components: {UiBtn},
       props:{
             forWhat:{
                   type:String,

@@ -1,19 +1,23 @@
 <template>
-      <div class="noteBlock">
-            <div v-for="(task, index) in tasks"
+      <div class="note-Block">
+            <div
+                  v-for="(task, index) in tasks"
                  :key="task"
-                 class=""
+                 class="Note-List"
             >
                   <h3>{{ task.name }}</h3>
                   <div>
                         <p
+                              class="flex"
                               v-for="i in task.arrTask.length>3 ? 2 : task.arrTask.length"
                               :key="task.arrTask[i-1]"
                         >{{ task.arrTask[i-1].task}}</p>
-                        <p v-if="task.arrTask.length>3">...</p>
+                        <p v-if="task.arrTask.length>3">
+                              <i class="material-icons">more_horiz</i>
+                        </p>
                   </div>
-                  <button @click.prevent="changePage(task, index)">редактировать</button>
-                  <button @click.prevent="confirmations(task, index)"><img src="../assets/vector_plus.svg" alt=""></button>
+                  <ui-btn @click.prevent="changePage(task, index)">редактировать</ui-btn>
+                  <ui-btn @click.prevent="confirmations(task, index)"><img src="../assets/vector_plus.svg" alt=""></ui-btn>
             </div>
       </div>
       <v-confirmation
@@ -27,10 +31,11 @@
 
 import {mapGetters, mapActions} from "vuex";
 import VConfirmation from "@/components/v-confirmation";
+import UiBtn from "@/components/UI/ui-btn";
 
 export default {
       name: "v-task",
-      components: {VConfirmation},
+      components: {UiBtn, VConfirmation},
       data() {
             return {
                   confirmationShow: false,
@@ -68,24 +73,32 @@ export default {
 </script>
 
 <style scoped>
-.noteBlock {
+.note-Block {
       display: flex;
-      box-sizing: border-box;
-      margin: 5px;
+      flex: 1;
+      justify-content: space-around;
       flex-wrap: wrap;
-      justify-content: center;
+      max-width: 90%;
+      margin: 10px;
+      padding: 10px;
+
 }
 
-.a1-a {
-      border: 2px solid black;
+.Note-List {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+
+      background: rgba(255, 227, 142, 1);
+      box-shadow: 3px 3px 4px 4px rgba(250, 222, 137, 1);
+      border-radius: 14px;
       min-width: 160px;
       max-width: 260px;
       min-height: 250px;
-      padding: 10px;
+      padding: 15px;
       margin: 10px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
 }
-
+.flex{
+      overflow: hidden
+}
 </style>
