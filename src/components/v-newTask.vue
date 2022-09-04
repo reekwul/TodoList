@@ -3,7 +3,14 @@
             class="new-Task"
             v-show="show">
             <div class="blok-Note">
-                  <h2>Создание списка задач</h2>
+                  <h2>Название заметки</h2>
+                  <input
+                        maxlength="25"
+                        class="task-bord"
+                        v-model="task.name" placeholder="Введите название заметки">
+                  <h3 v-if="task.arrTask.length">Список задач</h3>
+
+                  <h3>Создайте задачу</h3>
                   <div class="flex">
                         <input
                               class="task-bord"
@@ -14,14 +21,6 @@
                               @click.prevent="pushingInTask()"
                         ><i class="material-icons">add</i></ui-btn>
                   </div>
-
-
-                  <h3>Название заметки</h3>
-                  <input
-                        maxlength="25"
-                        class="task-bord"
-                        v-model="task.name" placeholder="Введите название заметки">
-                  <h3 v-if="task.arrTask.length">Список задач</h3>
                   <div
                         class="flex"
                         v-for="i in task.arrTask.length"
