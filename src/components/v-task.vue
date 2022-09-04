@@ -16,8 +16,12 @@
                               <i class="material-icons">more_horiz</i>
                         </p>
                   </div>
-                  <ui-btn @click.prevent="changePage(task, index)">редактировать</ui-btn>
-                  <ui-btn @click.prevent="confirmations(task, index)"><img src="../assets/vector_plus.svg" alt=""></ui-btn>
+                  <ui-btn class="btn-edit" @click.prevent="changePage(task, index)">
+                        <i class="material-icons-outlined">edit</i>
+                  </ui-btn>
+                  <ui-btn class="btn-delete" @click.prevent="confirmations(task, index)">
+                        <i class="material-icons-outlined">delete</i>
+                  </ui-btn>
             </div>
       </div>
       <v-confirmation
@@ -38,6 +42,7 @@ export default {
       components: {UiBtn, VConfirmation},
       data() {
             return {
+                  visibleBtnUpdeteDelete :false,
                   confirmationShow: false,
                   tasking:{}
             }
@@ -85,6 +90,8 @@ export default {
 }
 
 .Note-List {
+      position: relative;
+
       display: flex;
       flex: 1;
       flex-direction: column;
@@ -94,11 +101,27 @@ export default {
       border-radius: 14px;
       min-width: 160px;
       max-width: 260px;
-      min-height: 250px;
+
       padding: 15px;
       margin: 10px;
 }
 .flex{
       overflow: hidden
+}
+.btn-edit{
+      position: absolute;
+      top: -25px;
+      right:25px;
+      z-index: 5;
+
+      width: 45px;
+}
+.btn-delete{
+      position: absolute;
+      top: -25px;
+      right:-25px;
+      z-index: 5;
+
+      width: 45px;
 }
 </style>

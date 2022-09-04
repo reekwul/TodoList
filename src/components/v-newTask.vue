@@ -18,6 +18,7 @@
 
                   <h3>Название заметки</h3>
                   <input
+                        maxlength="25"
                         class="task-bord"
                         v-model="task.name" placeholder="Введите название заметки">
                   <h3 v-if="task.arrTask.length">Список задач</h3>
@@ -36,8 +37,10 @@
                   <div class="flex">
                         <ui-btn
                               :color="true"
-                              @click.prevent="pushTask">Создать</ui-btn>
-                        <ui-btn @click.prevent="closeAddTask()">отменить создание</ui-btn>
+                              @click.prevent="pushTask">Создать
+                        </ui-btn>
+                        <ui-btn @click.prevent="closeAddTask()">отменить создание
+                        </ui-btn>
                   </div>
             </div>
 
@@ -84,7 +87,7 @@ export default {
                   this.task.arrTask.splice(key, 1)
             },
             pushTask() {
-                  if (!this.task.name) return
+                  if (!this.task.name || !this.task.arrTask.length ) return
                   this.addTask(this.task)
                   this.closeAddTask()
             },

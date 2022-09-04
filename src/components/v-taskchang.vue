@@ -1,34 +1,68 @@
 <template>
-      <div>
+      <div class="font">
             <h1>Изменение заметки</h1>
-            <div>
-                  <h2><input v-model="changeTask.name"></h2>
-                  <div v-for="i in changeTask.arrTask.length"
-                       :key="i">
-                        <input v-model="changeTask.arrTask[i-1].task"
-                               placeholder="Добавить задачу">
-                        <input type="checkbox" v-model="changeTask.arrTask[i-1].checked">
-                        <ui-btn @click.prevent="removeTask(i-1)"><img src="../assets/vector_plus.svg" alt=""></ui-btn>
+            <div class="wrapper">
+                  <div class="block">
+                        <div>
+                              <h2>
+                                    <input
+                                          maxlength="25"
+                                          class="task-bord"
+                                          v-model="changeTask.name">
+                              </h2>
+
+                              <div class="flex"
+                                   v-for="i in changeTask.arrTask.length"
+                                   :key="i">
+                                    <input
+                                          :class="{'task-bord':true, 'task-text':changeTask.arrTask[i-1].checked}"
+                                          v-model="changeTask.arrTask[i-1].task"
+                                          placeholder="Добавить задачу">
+                                    <input
+                                          class="task-check"
+                                          type="checkbox"
+                                          v-model="changeTask.arrTask[i-1].checked">
+                                    <ui-btn @click.prevent="removeTask(i-1)">
+                                          <i class="material-icons-outlined">delete</i>
+                                    </ui-btn>
+                              </div>
+                              <div class="flex">
+                                    <ui-btn
+                                          :color="true"
+                                          @click.prevent="updateTask()"
+                                    ><i class="material-icons">save</i>
+                                    </ui-btn>
+                                    <ui-btn @click.prevent="confirmationsDefault()"
+                                    ><i class="material-icons-outlined">close</i>
+                                    </ui-btn>
+                                    <ui-btn @click.prevent="confirmationsRemove()"
+                                    ><i class="material-icons-outlined">delete</i>
+                                    </ui-btn>
+                              </div>
+                        </div>
                   </div>
-                  <ui-btn @click.prevent="updateTask()">сохранить изменения</ui-btn>
-                  <ui-btn @click.prevent="confirmationsDefault()">отменить изменения</ui-btn>
-                  <ui-btn @click.prevent="confirmationsRemove()">удалить</ui-btn>
-                  <input
-                        v-model="mission.task"
-                        placeholder="Добавить задачу">
-                  <ui-btn @click.prevent="pushingInTask()">add</ui-btn>
+                  <div class="add-task">
+                        <input
+                              class="task-bord"
+                              v-model="mission.task"
+                              placeholder="Добавить задачу">
+                        <ui-btn @click.prevent="pushingInTask()">
+                              <i class="material-icons">add</i>
+                        </ui-btn>
+                  </div>
+                  <v-confirmation
+                        :show="confirmationRemoveShow"
+                        @ActionPopupBtnTrue="confirmationsRemoveClose()"
+                        @ActionPopupBtnFalse="confirmationRemoveShow = false"
+                  />
+                  <v-confirmation
+                        :show="confirmationDefaultShow"
+                        @ActionPopupBtnTrue="confirmationsDefaultClose()"
+                        @ActionPopupBtnFalse="confirmationDefaultShow = false"
+                  />
             </div>
-            <v-confirmation
-                  :show="confirmationRemoveShow"
-                  @ActionPopupBtnTrue="confirmationsRemoveClose()"
-                  @ActionPopupBtnFalse="confirmationRemoveShow = false"
-            />
-            <v-confirmation
-                  :show="confirmationDefaultShow"
-                  @ActionPopupBtn="confirmationsDefaultClose()"
-                  @ActionPopupBtnFalse="confirmationDefaultShow = false"
-            />
       </div>
+
 </template>
 
 <script>
@@ -46,8 +80,8 @@ export default {
       components: {UiBtn, VConfirmation},
       data() {
             return {
-                  confirmationRemoveShow:false,
-                  confirmationDefaultShow:false,
+                  confirmationRemoveShow: false,
+                  confirmationDefaultShow: false,
                   changeTask: {},
                   mission: {
                         ...missionPattern
@@ -66,7 +100,7 @@ export default {
                   this.update(this.changeTask)
                   this.$router.push("/")
             },
-            defaultTask(){
+            defaultTask() {
                   this.changeTask = {
                         ...JSON.parse(JSON.stringify(this.task))
                   }
@@ -88,7 +122,7 @@ export default {
                   this.confirmationRemoveShow = false
                   this.$router.push("/")
             },
-            confirmationsDefaultClose(){
+            confirmationsDefaultClose() {
                   this.defaultTask()
                   this.confirmationDefaultShow = false
             },
@@ -107,7 +141,90 @@ export default {
 </script>
 
 <style scoped>
-img {
-      height: 10px
+.font{
+      font-family: "Arial", sans-serif;
+      font-style: normal;
+      font-size: 13px;
+      line-height: 20px;
+      font-weight: 700;
+}
+.wrapper {
+      display: flex;
+
+      flex-wrap: wrap;
+      justify-content: space-around;
+}
+
+.block {
+      max-width: 500px;
+      align-items: self-end;
+      flex: 1;
+}
+
+.flex {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: end;
+}
+
+.add-task {
+      display: flex;
+      margin-top: 80px;
+      align-items: start ;
+}
+
+.task-bord {
+      flex: 1;
+      margin: 10px;
+      padding: 10px;
+      font-size: 20px;
+      border: none;
+      background: rgba(0, 9, 60, 0.2);
+      border-radius: 6px;
+      outline: none;
+
+      transition: 1s;
+}
+
+.task-check {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      margin: 7px;
+      padding: 20px;
+      background-color: rgba(247, 148, 29, 1);
+      border: 2px solid rgba(247, 148, 29, 1);
+      border-radius: 10%;
+
+      transition: 0.3s;
+}
+
+.task-check:hover {
+      background: white;
+      border: 2px solid rgba(247, 148, 29, 1);
+}
+
+.task-check:checked {
+      background-color: rgba(0, 9, 60, 1);
+      border: 2px solid rgba(0, 9, 60, 1);
+}
+
+.task-check:checked:before {
+      color: white;
+      padding: initial;
+      font-weight: bold;
+}
+
+.task-check:checked:hover {
+      background: white;
+      border: 2px solid rgba(0, 9, 60, 1);
+}
+
+.task-text {
+      font-style: italic;
+      text-decoration: line-through;
+
+
 }
 </style>
