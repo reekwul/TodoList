@@ -14,6 +14,7 @@
                               <div class="flex"
                                    v-for="i in changeTask.arrTask.length"
                                    :key="i">
+                                   <h2>{{i}}.</h2>
                                     <input
                                           :class="{'task-bord':true, 'task-text':changeTask.arrTask[i-1].checked}"
                                           v-model="changeTask.arrTask[i-1].task"
@@ -41,14 +42,20 @@
                               </div>
                         </div>
                   </div>
-                  <div class="add-task">
-                        <input
-                              class="task-bord"
-                              v-model="mission.task"
-                              placeholder="Добавить задачу">
-                        <ui-btn @click.prevent="pushingInTask()">
-                              <i class="material-icons">add</i>
-                        </ui-btn>
+                  <div class="flex-column">
+                        <h2>
+                              Добавление задачи
+                        </h2>
+                        <div class="add-task">
+                              <input
+                                    class="task-bord"
+                                    v-model="mission.task"
+                                    placeholder="Добавить задачу">
+                              <ui-btn @click.prevent="pushingInTask()">
+                                    <i class="material-icons">add</i>
+                              </ui-btn>
+                        </div>
+
                   </div>
                   <v-confirmation
                         :show="confirmationRemoveShow"
@@ -167,10 +174,13 @@ export default {
       align-items: center;
       justify-content: end;
 }
+.flex-column{
+      display: flex;
+      flex-direction: column;
+}
 
 .add-task {
       display: flex;
-      margin-top: 80px;
       align-items: start ;
 }
 

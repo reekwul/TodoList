@@ -21,4 +21,9 @@ export default {
 </script>
 
 <style scoped>
+#app{
+      right: 0;
+      left: 0;
+      width: 80%;
+}
 </style>

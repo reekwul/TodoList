@@ -11,7 +11,7 @@
                               class="flex"
                               v-for="i in task.arrTask.length>3 ? 2 : task.arrTask.length"
                               :key="task.arrTask[i-1]"
-                        >{{ task.arrTask[i-1].task}}</p>
+                        >{{i}}. {{ task.arrTask[i-1].task}}</p>
                         <p v-if="task.arrTask.length>3">
                               <i class="material-icons">more_horiz</i>
                         </p>
