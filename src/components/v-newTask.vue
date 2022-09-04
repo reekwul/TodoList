@@ -8,8 +8,6 @@
                         maxlength="25"
                         class="task-bord"
                         v-model="task.name" placeholder="Введите название заметки">
-                  <h3 v-if="task.arrTask.length">Список задач</h3>
-
                   <h3>Создайте задачу</h3>
                   <div class="flex">
                         <input
@@ -21,6 +19,7 @@
                               @click.prevent="pushingInTask()"
                         ><i class="material-icons">add</i></ui-btn>
                   </div>
+                  <h3 v-if="task.arrTask.length">Список задач</h3>
                   <div
                         class="flex"
                         v-for="i in task.arrTask.length"
