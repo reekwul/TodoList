@@ -1,4 +1,5 @@
 <template>
+
       <div
             class="new-Task"
             v-show="show">
@@ -19,20 +20,22 @@
                               @click.prevent="pushingInTask()"
                         ><i class="material-icons">add</i></ui-btn>
                   </div>
-                  <h3 v-if="task.arrTask.length">Список задач</h3>
-                  <div
-                        class="flex"
-                        v-for="i in task.arrTask.length"
-                       :key="i">
-                        <h3>{{i}}.</h3>
-                        <input
-                              class="task-bord"
-                              v-model="task.arrTask[i-1].task">
+                  <transition-group name="list">
+                        <h3 v-if="task.arrTask.length">Список задач</h3>
+                        <div
+                              class="flex"
+                              v-for="i in task.arrTask.length"
+                              :key="i">
+                              <h3>{{ i }}.</h3>
+                              <input
+                                    class="task-bord"
+                                    v-model="task.arrTask[i-1].task">
 
-                        <ui-btn @click.prevent="removeTask(i-1)">
-                              <i class="material-icons">delete</i>
-                        </ui-btn>
-                  </div>
+                              <ui-btn @click.prevent="removeTask(i-1)">
+                                    <i class="material-icons">delete</i>
+                              </ui-btn>
+                        </div>
+                  </transition-group>
                   <div class="flex">
                         <ui-btn
                               :color="true"
@@ -42,8 +45,8 @@
                         </ui-btn>
                   </div>
             </div>
-
       </div>
+
 </template>
 
 <script>
@@ -88,7 +91,7 @@ export default {
             },
             //добавление заметки в общий список всех заметок
             pushTask() {
-                  if (!this.task.name || !this.task.arrTask.length ) return
+                  if (!this.task.name || !this.task.arrTask.length) return
                   this.addTask(this.task)
                   this.closeAddTask()
             },
@@ -134,6 +137,7 @@ export default {
       background: rgba(0, 9, 60, 0.2);
 
 }
+
 .blok-Note {
       background: white;
       margin: 10px;
@@ -144,12 +148,15 @@ export default {
       justify-content: center;
       border-radius: 12px;
       max-width: 500px;
+
 }
-.flex{
+
+.flex {
       display: flex;
       align-items: center;
 }
-.task-bord{
+
+.task-bord {
       flex: 1;
       margin: 10px;
       padding: 10px;
@@ -158,5 +165,21 @@ export default {
       background: rgba(0, 9, 60, 0.2);
       border-radius: 6px;
       outline: none;
+}
+
+.list-item {
+      display: inline-block;
+      margin-right: 10px;
+}
+
+.list-enter-active,
+.list-leave-active {
+      transition: all 1s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+      opacity: 0;
+      transform: translateY(30px);
 }
 </style>

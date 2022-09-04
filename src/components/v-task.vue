@@ -1,5 +1,6 @@
 <template>
       <div class="note-Block">
+            <transition-group name="list">
             <div
                   v-for="(task, index) in tasks"
                  :key="task"
@@ -23,6 +24,7 @@
                         <i class="material-icons-outlined">delete</i>
                   </ui-btn>
             </div>
+            </transition-group>
       </div>
       <v-confirmation
       :show="confirmationShow"
@@ -126,5 +128,18 @@ export default {
       z-index: 5;
 
       width: 45px;
+}
+.list-item {
+      display: inline-block;
+      margin-right: 10px;
+}
+.list-enter-active,
+.list-leave-active {
+      transition: all 1s ease;
+}
+.list-enter-from,
+.list-leave-to {
+      opacity: 0;
+      transform: translateY(30px);
 }
 </style>

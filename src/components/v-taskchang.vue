@@ -10,7 +10,7 @@
                                           class="task-bord"
                                           v-model="changeTask.name">
                               </h2>
-
+                              <transition-group name="list">
                               <div class="flex"
                                    v-for="i in changeTask.arrTask.length"
                                    :key="i">
@@ -27,6 +27,7 @@
                                           <i class="material-icons-outlined">delete</i>
                                     </ui-btn>
                               </div>
+                              </transition-group>
                               <div class="flex">
                                     <ui-btn
                                           :color="true"
@@ -119,6 +120,7 @@ export default {
             },
             //добавление заметки в общий список заметок со всеми изменениями
             pushingInTask() {
+                  if(!this.mission.task) return
                   this.changeTask.arrTask.push(JSON.parse(JSON.stringify(this.mission)))
                   this.mission = {
                         ...missionPattern
@@ -170,13 +172,11 @@ export default {
       flex-wrap: wrap;
       justify-content: space-around;
 }
-
 .block {
       max-width: 500px;
       align-items: self-end;
       flex: 1;
 }
-
 .flex {
       display: flex;
       flex: 1;
@@ -187,12 +187,10 @@ export default {
       display: flex;
       flex-direction: column;
 }
-
 .add-task {
       display: flex;
       align-items: start ;
 }
-
 .task-bord {
       flex: 1;
       margin: 10px;
@@ -205,7 +203,6 @@ export default {
 
       transition: 1s;
 }
-
 .task-check {
       appearance: none;
       -webkit-appearance: none;
@@ -218,32 +215,40 @@ export default {
 
       transition: 0.3s;
 }
-
 .task-check:hover {
       background: white;
       border: 2px solid rgba(247, 148, 29, 1);
 }
-
 .task-check:checked {
       background-color: rgba(0, 9, 60, 1);
       border: 2px solid rgba(0, 9, 60, 1);
 }
-
 .task-check:checked:before {
       color: white;
       padding: initial;
       font-weight: bold;
 }
-
 .task-check:checked:hover {
       background: white;
       border: 2px solid rgba(0, 9, 60, 1);
 }
-
 .task-text {
       font-style: italic;
       text-decoration: line-through;
+}
+.list-item {
+      display: inline-block;
+      margin-right: 10px;
+}
 
+.list-enter-active,
+.list-leave-active {
+      transition: all 1s ease;
+}
 
+.list-enter-from,
+.list-leave-to {
+      opacity: 0;
+      transform: translateY(30px);
 }
 </style>
