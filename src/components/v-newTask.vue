@@ -26,6 +26,7 @@
                         class="flex"
                         v-for="i in task.arrTask.length"
                        :key="i">
+                        <h3>{{i}}.</h3>
                         <input
                               class="task-bord"
                               v-model="task.arrTask[i-1].task">
@@ -83,14 +84,17 @@ export default {
             ...mapActions({
                   addTask: 'tasks/addTask'
             }),
+            //удаление пункта заметки
             removeTask(key) {
                   this.task.arrTask.splice(key, 1)
             },
+            //добавление заметки в общий список всех заметок
             pushTask() {
                   if (!this.task.name || !this.task.arrTask.length ) return
                   this.addTask(this.task)
                   this.closeAddTask()
             },
+            //добавление задачи в список с задачами для заметки
             pushingInTask() {
                   if (!this.mission.task) return
                   this.task.arrTask.push(JSON.parse(JSON.stringify(this.mission)))
@@ -98,10 +102,12 @@ export default {
                         ...missionPattern
                   }
             },
+            //закрытие всплывающего окна
             closeAddTask() {
                   this.resetTask()
                   this.$emit('closeAddNewTask')
             },
+            //сброс обьекта добавления
             resetTask() {
                   this.task = JSON.parse(JSON.stringify(taskObjPattern))
             },

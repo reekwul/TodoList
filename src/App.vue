@@ -15,15 +15,12 @@ export default {
             }),
       },
       mounted() {
+            //получение из локального хранилища данных и запись их в стейт
             this.inLocal()
       },
 }
 </script>
 
 <style scoped>
-#app{
-      right: 0;
-      left: 0;
-      width: 80%;
-}
+
 </style>

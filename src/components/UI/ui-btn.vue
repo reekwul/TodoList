@@ -9,6 +9,7 @@
 export default {
       name: "ui-btn",
       props: {
+            //изменеие стиля кнопки
             color: {
                   type: Boolean,
                   default() {

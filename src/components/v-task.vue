@@ -52,16 +52,19 @@ export default {
                   remove: 'tasks/delTask',
                   changeTask: 'tasks/addChange'
             }),
+            //добавление изменяющейся заметки в стейт, переход на новую страницу
             changePage(task, index) {
                   task.index = index
                   this.changeTask(task)
                   this.$router.push('/change')
             },
+            //вызов диалогового окна подтверждения
             confirmations(task, index) {
                   task.index = index
                   this.tasking = task
                   this.confirmationShow = true
             },
+            //закрытие диалогового окна подтверждения
             confirmationsClose() {
                   this.remove(this.tasking)
                   this.confirmationShow = false

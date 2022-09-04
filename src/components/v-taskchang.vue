@@ -87,7 +87,9 @@ export default {
       components: {UiBtn, VConfirmation},
       data() {
             return {
+                  //для диалогового окна удаления
                   confirmationRemoveShow: false,
+                  //для диалогового окна сброса к первоначальному обьекту
                   confirmationDefaultShow: false,
                   changeTask: {},
                   mission: {
@@ -100,35 +102,42 @@ export default {
                   update: 'tasks/addTask',
                   remove: 'tasks/delTask'
             }),
+            //удаление задачи из списка задач
             removeTask(key) {
                   this.changeTask.arrTask.splice(key, 1)
             },
+            //сохранение изменений заметки в общий список заметок
             updateTask() {
                   this.update(this.changeTask)
                   this.$router.push("/")
             },
+            //возвращение заметки к первоначальному состоянию
             defaultTask() {
                   this.changeTask = {
                         ...JSON.parse(JSON.stringify(this.task))
                   }
             },
+            //добавление заметки в общий список заметок со всеми изменениями
             pushingInTask() {
                   this.changeTask.arrTask.push(JSON.parse(JSON.stringify(this.mission)))
                   this.mission = {
                         ...missionPattern
                   }
             },
+
             confirmationsRemove() {
                   this.confirmationRemoveShow = true
             },
             confirmationsDefault() {
                   this.confirmationDefaultShow = true
             },
+            //подтвержение удаления заметки
             confirmationsRemoveClose() {
                   this.remove(this.changeTask)
                   this.confirmationRemoveShow = false
                   this.$router.push("/")
             },
+            //подтверждение возврата к исходному состоянию заметки
             confirmationsDefaultClose() {
                   this.defaultTask()
                   this.confirmationDefaultShow = false
