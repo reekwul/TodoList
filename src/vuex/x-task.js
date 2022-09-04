@@ -16,7 +16,7 @@ export const taskModule = {
             state.tasks = JSON.parse(localStorage.tasks)
         },
         add(state, task) {
-            if(!task.index){
+            if(!task.index && task.index!==0){
                 state.tasks.push(JSON.parse(JSON.stringify(task)))
                 return
         }
